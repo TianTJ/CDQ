@@ -3,31 +3,51 @@
 
 <head>
     <meta charset="utf-8">
-    <title>都听你的 </title>
+    <title>仙女下凡</title>
     <script src="js/jquery.js"></script>
     <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js"> </script>
 </head>
 <style>
-html-selector {
-    font-family: font-name, Helvetica, Arial, sans-serif;
-}
-body{
-    margin:0px; 
-    padding:0px; 
-    overflow:hidden;
 
-}
-canvas {
-    position: absolute;
-    padding: 0;
-    margin: 0;
-    z-index: -1;
-}
 </style>
+
 <body>
+    <audio id="bgsound" src="sound/bjj.mp3" controls="controls" autoplay="autoplay" loop="loop">
+        
+    </audio>
     <canvas id="sakura">
        
     </canvas> 
+    <div id="content">
+        <div class="content_icon">
+            <img src="images/flower.gif" class="flower"/>
+        </div>
+        <div class="letter_content">
+            <text class="ln">你一出场别人都显得不过如此&ensp;</text>
+        </div>
+        <div class="letter_content1">
+            <a class="ln">  你准备好了吗？</a>
+            <button class="noreadybtn" type="button" onclick="showredaybtn()">没有</button>
+            <button class="readybtn" type="button"  onclick="playsound()">好了</button>
+        </div>
+        <div class="toyouwordsdiv">
+            <a class="toyouwords"></a>
+        </div>
+        <button class="yeslove" type="button" onclick="yeslovefun()">愿意</button>
+        <a class="giveyouflower">送你花花！我在你家楼下呢！</a>
+    </div>
+    <div id="head">
+        <img src="images/st2.gif" class="st2_1"/>
+        <text class="soundstr"></text>
+        <img src="images/st1.gif" class="st2_2"/>
+        <text class="startstr">陈道清</text>
+        <a style="cursor:pointer" class="main_page">首页</a>
+        <a style="cursor:pointer" class="record_page">待定</a>
+    </div>  
+    <div id="black_div">
+    </div>
 
     <!-- sakura shader -->
     <script id="sakura_point_vsh" type="x-shader/x_vertex">
@@ -1980,5 +2000,108 @@ void main(void) {
 
     }
     )(window, 'equestAnimationFrame');
+</script>
+<script>
+   var tounum = 0
+
+    $('#content .giveyouflower').hide()
+    $('#content .content_icon').hide()
+    $('#content .letter_content').hide()
+    $('#content .yeslove').hide()
+
+    $('#head .soundstr').fadeOut(0)
+    let audio = $('#bgsound')[0]
+   // $('#content .toyouwordsdiv .toyouwords').text(toyouwords);
+    $('#content .toyouwordsdiv').hide();
+    function showtoyouworsstr(){
+        const $link = $('#content .toyouwordsdiv .toyouwords');
+        var chars = '哈哈哈！我等不下去了。没见面前我就觉得你很好，见面后觉得更好了。就像我说那样，缘分总会来的，该争取还是要争取的，所以我来争取了。我超级无敌喜欢你，不是因为合适什么的，就是单纯的喜欢，就是想让你每天都高高兴兴的，不要不开心。就是很简单的我觉得你就是我想在一生的那个人。所以啊，陈道清啊，你愿意和我在一起不？'.split('')
+        
+        // 2. 生成随机顺序的索引（用于打乱字符显示顺序）
+        const indexes = Array.from({ length: chars.length }, (_, i) => i);
+        // 打乱索引顺序（ Fisher-Yates 洗牌算法）
+        for (let i = indexes.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
+        }
+        
+        // 3. 逐个字符添加到<a>标签，并设置随机延迟渐显
+        chars.forEach((char, index) => {
+            // 创建单个字符的span标签（初始透明）
+            const $char = $('<span>')
+                .text(char)
+                .css({
+                opacity: 0, // 初始完全透明
+                display: 'inline-block' // 确保能设置透明度
+                });
+            
+            // 添加到<a>标签中
+            $link.append($char);
+            
+            // 4. 根据随机索引设置延迟时间（每个字符延迟不同，实现随机出现）
+            // 延迟范围：0 ~ 2000毫秒（可调整），每个字符间隔50ms左右避免拥挤
+            const delay = indexes.indexOf(index) * 50 + Math.random() * 200;
+            
+            // 渐显动画（500毫秒完成）
+            $char.delay(delay).animate({ opacity: 1 }, 100);
+        });
+    }
+    function yeslovefun(){
+        $('#content .yeslove').hide()
+        $('#content .toyouwordsdiv').hide();
+        $('#content .letter_content1').hide()
+        $('#content .content_icon').show()
+        $('#content .letter_content').show()
+        $('#content .giveyouflower').show()
+    }   
+
+    function playsound(){
+        $('#content .letter_content1').hide()
+        $('#content .toyouwordsdiv').show();
+        showtoyouworsstr()
+        $('#content .yeslove').show()
+        if(tounum<1){
+            $('#head .startstr').fadeOut(500)
+            setTimeout(() => {
+                $('#head .soundstr').fadeIn(500)
+            }, 500);
+            audio.play()
+        }
+        tounum++
+    }
+   // $('#content .letter_content a').beatText({isAuth:true,beatHeight:"1em",isRotate:true});
+
+    function showredaybtn(){
+        $('#content .letter_content1 .noreadybtn').text('点我没用');
+        $('#content .letter_content1 .readybtn').text('点我点我');
+    } 
+
+    var soundicr = "[00:02.00] 不将就 \n [00:04.00] 歌：李荣浩 \n [00:07.00] 作词：施人诚 作曲：李荣浩 \n [00:10.50] 编曲：李荣浩 \n  [00:13.00] 那时候 我以为爱的是生活 \n [00:19.00] 也算懂得 什么适合什么不可 \n [00:25.00] 最近还是一样努力着 \n [00:29.00] 想要和你在一起 \n [00:32.00] 你的追求者 你的坎坷 \n [00:36.00] 我开的车 算一算 虚度了多少个年头 \n [00:46.00] 仿佛足够写一套错爱的春秋 \n [00:53.00] 如果以后 你还想为谁 浪费美好时候 \n [00:59.00] 眼泪只能在我的胸膛 毫无保留 \n [01:09.00] 互相吸引到白头 悲伤坚决不放手 \n [01:23.70] 开始纠缠之后 才又被人放大了自由 \n [01:36.00] 你的暴烈太温柔 感情又痛又享受 \n [01:50.00] 如果我说不吻你不罢休 \n [01:55.00] 谁能逼我将就 \n [2:06.50] 你问我 为什么顽固而专一 \n [2:12.00] 天下太大 没有人比你更合适 \n [02:19.00] 其实我觉得这样很值 \n [02:22.00] 只想选择你啊 \n [02:26.00] 你一出场别人都显得不过如此 \n [02:35.00] 互相恩爱到白头 悲伤坚决不放手 \n [02:48.00] 开始纠缠之后 才又被人放大了自由 \n [03:01.00] 你的暴烈太温柔 感情又痛又享受 \n [03:14.00] 如果我说不吻你不罢休 \n [03:20.00] 谁能逼我将就 \n [03:57.80] 互相扶持到白头 悲伤坚决不放手 \n [04:10.00] 开始纠缠之后 才又被人放大了自由 \n [04:24.00] 你的暴烈太温柔 感情又痛又享受 \n [04:38.50] 如果我说不吻你不罢休 \n [04:43.00] 谁能逼我将就 \n [04:50.00] 他们不过将就"
+    var lyrics = soundicr.split("\n");//this.lrc代表歌词文件内容的引用
+    var lrcObj = {};
+    for(var i=0;i<lyrics.length;i++){
+        var lyric = decodeURIComponent(lyrics[i]);
+        var timeReg = /\[\d*:\d*((\.|\:)\d*)*\]/g;
+        var timeRegExpArr = lyric.match(timeReg);
+        if(!timeRegExpArr)continue;
+        var clause = lyric.replace(timeReg,'');
+        for(var k = 0,h = timeRegExpArr.length;k < h;k++) {
+            var t = timeRegExpArr[k];
+            var min = Number(String(t.match(/\[\d*/i)).slice(1)),
+                sec = Number(String(t.match(/\:\d*/i)).slice(1));
+            var time = min * 60 + sec;
+            lrcObj[time] = clause;
+        }
+    }
+    console.log(lrcObj)
+    $("#bgsound").ready(function () {
+        var oAudio=document.getElementsByTagName('audio')[0];
+        oAudio.ontimeupdate = function () { 
+            console.log(oAudio.currentTime)
+            let obj = lrcObj[Math.floor(oAudio.currentTime)];
+            $("#head .soundstr").text(obj)
+            var idx = Math.floor(Math.random()*19);
+        }
+    })
 </script>
 </html>

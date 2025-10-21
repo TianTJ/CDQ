@@ -1,7 +1,4 @@
-@font-face {
-    font-family: NKaiti;
-    src: url('ttf/kaiti.ttf');
-}
+
 button {
   /* 1. 取消点击时的默认边框高亮（聚焦状态） */
   outline: none; /* 现代浏览器 */
@@ -62,7 +59,7 @@ canvas {
 #content .letter_content .ln{
     position: relative;
     font-size: 80px;
-    font-family: NKaiti;
+    font-family: serif;
     letter-spacing:4px; 
     /* background-image: linear-gradient(to right, rgb(0, 255, 0),rgb(0, 0, 255),rgb(255, 255, 0),rgb(0, 255, 255));
     -webkit-background-clip: text;*/
@@ -89,17 +86,8 @@ canvas {
     top:50%;
     left:5%;
     margin-top: -500px;
-	background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 20px;;
-}
-#popheart{
-    position: absolute;
-    width: 300px;
-    height: 300px; 
-    top: 30%;
-    left: 50%;
-    margin-top: 150px;
-    margin-left: -150px;
+	background-color: rgba(184, 184, 184, 0.3);
+    border-radius: 20px;
 }
 #content .letter_content1 .noreadybtn{
     position: absolute;
@@ -161,27 +149,18 @@ canvas {
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
   transform: scale(1.05); /* 轻微放大 */
 }
-#content .letter_content1 .toyouwords{
-    position: relative;
-    font-size: 50px;
-    top: 0px;
-    color: rgb(255, 212, 193);
-    font-family: NKaiti;
-    letter-spacing:3px;
-    /* text-shadow: 0 0 5px #fff,
-             0 0 20px #ff06de,
-             0 0 35px #ff06de,
-             0 0 40px #ff06de,
-             0 0 50px #ff06de,
-             0 0 75px #ff06de; */
-}
 #content .letter_content1 .ln{
     position: relative;
     font-size: 80px;
     top: 100px;
-    color: rgb(255, 212, 193);
-    font-family: NKaiti;
+    color: rgb(255, 183, 183);
+    font-family: serif;
     letter-spacing:3px;
+    font-weight: 600;
+    text-shadow: 
+    0 0 5px rgba(255, 137, 137, 0.8), /* 中心高光 */
+    0 0 10px rgba(192, 253, 255, 0.5), /* 扩散高光 */
+    1px 1px 3px rgba(0, 0, 0, 0.3); /* 底部暗边 */
     /* text-shadow: 0 0 5px #fff,
              0 0 20px #ff06de,
              0 0 35px #ff06de,
@@ -224,7 +203,7 @@ canvas {
     right: 15%;
     color: rgb(246, 220, 208);
     text-align: center;
-    font-family: NKaiti;
+    font-family: serif;
     top:40px;
     letter-spacing:5px;
      text-shadow: 0 0 5px #fff,
@@ -255,7 +234,7 @@ canvas {
     right: 20%;
     text-align: center;
     color:transparent;
-    font-family: NKaiti;
+    font-family: serif;
     top:60px;
     letter-spacing:3px;
     -webkit-background-clip: text;
@@ -265,7 +244,7 @@ canvas {
     position: absolute;
     font-size: 40px;
     color:rgb(255, 255, 255);
-    font-family: sans-serif;
+    font-family: serif;
     left: 15%;
     letter-spacing:3px;
     top:55px;
@@ -275,7 +254,7 @@ canvas {
     position: absolute;
     font-size: 30px;
     color: rgb(255, 255, 255);
-    font-family: "Microsoft Yahei","仿宋",sans-serif;
+    font-family: serif;
     right: 35%;
     top:65px;
     display: none;
@@ -287,7 +266,7 @@ canvas {
     position: absolute;
     font-size: 30px;
     color: rgb(255, 255, 255);
-    font-family: "Microsoft Yahei","仿宋",sans-serif;
+    font-family: serif;
     right: 15%;
     top:65px;
     display: none;
@@ -314,7 +293,7 @@ canvas {
 }
 #black_div{
 	position: fixed; 
-	background-color:black; 
+	background-color:rgb(0, 0, 0); 
 	width:100%; 
 	height:100%; 
 	left:0%;top:0%;
@@ -370,4 +349,35 @@ canvas {
     transition: all 0.3s ease;
     cursor: pointer;
     animation: scalePulse 1s infinite ease-in-out; /* 2秒1次，无限循环，缓动过渡 */
+}
+#content .toyouwordsdiv{
+    position: absolute;
+    top: 230px;
+    width: 90%;
+    height: 800px;
+    left: 5%;
+    text-align: center;
+}
+#content .toyouwordsdiv .toyouwords{
+    position: relative;
+    width: 90%;
+    height: 125px;
+    text-align: center;
+    top: 0px;
+    font-size: 70px;
+    color: rgb(42, 142, 255);
+    font-family: serif;
+    letter-spacing:3px;
+   
+  text-shadow: 
+    1px 1px 1px rgba(255, 255, 255, 0.8), /* 中心高光 */
+    1px 1px 1px rgba(255, 255, 255, 0.8), /* 扩散高光 */
+    1px 1px 1px rgba(255, 255, 255, 0.8); /* 底部暗边 */
+  
+    /* text-shadow: 0 0 5px #fff,
+             0 0 20px #ff06de,
+             0 0 35px #ff06de,
+             0 0 40px #ff06de,
+             0 0 50px #ff06de,
+             0 0 75px #ff06de; */
 }

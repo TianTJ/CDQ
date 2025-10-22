@@ -35,16 +35,16 @@
         <div class="toyouwordsdiv">
             <a class="toyouwords"></a>
         </div>
-        <button class="yeslove" type="button" onclick="yeslovefun()">愿意</button>
-        <a class="giveyouflower">送你花花！我现在想见到你！</a>
+        <button class="yeslove" type="button" onclick="yeslovefun()">愿  意</button>
+        <a class="giveyouflower">送你花花！现在可以见到你吗?</a>
     </div>
     <div id="head">
         <img src="images/st2.gif" class="st2_1"/>
         <text class="soundstr"></text>
         <img src="images/st1.gif" class="st2_2"/>
-        <text class="startstr">陈道清</text>
         <a style="cursor:pointer" class="main_page">首页</a>
         <a style="cursor:pointer" class="record_page">待定</a>
+            <text class="startstr">陈道清</text>
     </div>  
     <div id="black_div">
     </div>
@@ -2011,41 +2011,57 @@ void main(void) {
 
     $('#head .soundstr').fadeOut(0)
     let audio = $('#bgsound')[0]
-   // $('#content .toyouwordsdiv .toyouwords').text(toyouwords);
     $('#content .toyouwordsdiv').hide();
+
+    const text = `哈哈哈！我等不下去了。没见面前我就觉得你很好，见面后觉得更好了。就像我说那样，缘分总会来的，该争取还是要争取的，所以我来争取了。我超级无敌喜欢你，不是因为合适什么的，就是单纯的喜欢，就是想让你每天都高高兴兴的，不要不开心。就是很简单的我觉得你就是我想在一生的那个人。所以啊，陈道清啊，你愿意和我在一起不？`;
+    
+    let index = 0; // 当前字符索引
+    var addstrover = 0
     function showtoyouworsstr(){
-        const $link = $('#content .toyouwordsdiv .toyouwords');
-        var chars = '哈哈哈！我等不下去了。没见面前我就觉得你很好，见面后觉得更好了。就像我说那样，缘分总会来的，该争取还是要争取的，所以我来争取了。我超级无敌喜欢你，不是因为合适什么的，就是单纯的喜欢，就是想让你每天都高高兴兴的，不要不开心。就是很简单的我觉得你就是我想在一生的那个人。所以啊，陈道清啊，你愿意和我在一起不？'.split('')
-        
-        // 2. 生成随机顺序的索引（用于打乱字符显示顺序）
-        const indexes = Array.from({ length: chars.length }, (_, i) => i);
-        // 打乱索引顺序（ Fisher-Yates 洗牌算法）
-        for (let i = indexes.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
+        if(addstrover)return
+        if (index < text.length) {
+            // 拼接当前字符（支持空格、标点）
+            var str = text.charAt(index)
+            console.log($('#content .toyouwordsdiv .toyouwords').text())
+            $('#content .toyouwordsdiv .toyouwords').append(str);
+            index++;
+        }else{
+            addstrover = 1
+            $('#content .yeslove').show()
         }
+        // const $link = $('#content .toyouwordsdiv .toyouwords');
+        // var chars = '哈哈哈！我等不下去了。没见面前我就觉得你很好，见面后觉得更好了。就像我说那样，缘分总会来的，该争取还是要争取的，所以我来争取了。我超级无敌喜欢你，不是因为合适什么的，就是单纯的喜欢，就是想让你每天都高高兴兴的，不要不开心。就是很简单的我觉得你就是我想在一生的那个人。所以啊，陈道清啊，你愿意和我在一起不？'.split('')
         
-        // 3. 逐个字符添加到<a>标签，并设置随机延迟渐显
-        chars.forEach((char, index) => {
-            // 创建单个字符的span标签（初始透明）
-            const $char = $('<span>')
-                .text(char)
-                .css({
-                opacity: 0, // 初始完全透明
-                display: 'inline-block' // 确保能设置透明度
-                });
+        // // 2. 生成随机顺序的索引（用于打乱字符显示顺序）
+        // const indexes = Array.from({ length: chars.length }, (_, i) => i);
+        // // 打乱索引顺序（ Fisher-Yates 洗牌算法）
+        // for (let i = indexes.length - 1; i > 0; i--) {
+        // const j = Math.floor(Math.random() * (i + 1));
+        // [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
+        // }
+        
+        // // 3. 逐个字符添加到<a>标签，并设置随机延迟渐显
+        // chars.forEach((char, index) => {
+        //     // 创建单个字符的span标签（初始透明）
+        //     const $char = $('<span>')
+        //         .text(char)
+        //         .css({
+        //         opacity: 0, // 初始完全透明
+        //         display: 'inline-block' // 确保能设置透明度
+        //         });
             
-            // 添加到<a>标签中
-            $link.append($char);
+        //     // 添加到<a>标签中
+        //     $link.append($char);
             
-            // 4. 根据随机索引设置延迟时间（每个字符延迟不同，实现随机出现）
-            // 延迟范围：0 ~ 2000毫秒（可调整），每个字符间隔50ms左右避免拥挤
-            const delay = indexes.indexOf(index) * 50 + Math.random() * 200;
+        //     // 4. 根据随机索引设置延迟时间（每个字符延迟不同，实现随机出现）
+        //     // 延迟范围：0 ~ 2000毫秒（可调整），每个字符间隔50ms左右避免拥挤
+        //     const delay = indexes.indexOf(index) * 10 + Math.random() * 100;
             
-            // 渐显动画（500毫秒完成）
-            $char.delay(delay).animate({ opacity: 1 }, 100);
-        });
+        //     // 渐显动画（500毫秒完成）
+        //     $char.delay(delay).animate({ opacity: 1 }, 50);
+        // });
     }
+    
     function yeslovefun(){
         $('#content .yeslove').hide()
         $('#content .toyouwordsdiv').hide();
@@ -2058,8 +2074,9 @@ void main(void) {
     function playsound(){
         $('#content .letter_content1').hide()
         $('#content .toyouwordsdiv').show();
-        showtoyouworsstr()
-        $('#content .yeslove').show()
+        setInterval(function(){
+            showtoyouworsstr()
+        }, 100);
         if(tounum<1){
             $('#head .startstr').fadeOut(500)
             setTimeout(() => {
@@ -2097,7 +2114,7 @@ void main(void) {
     $("#bgsound").ready(function () {
         var oAudio=document.getElementsByTagName('audio')[0];
         oAudio.ontimeupdate = function () { 
-            console.log(oAudio.currentTime)
+            //console.log(oAudio.currentTime)
             let obj = lrcObj[Math.floor(oAudio.currentTime)];
             $("#head .soundstr").text(obj)
             var idx = Math.floor(Math.random()*19);

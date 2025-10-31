@@ -1,5 +1,4 @@
 $(function(){
-    $('#login').hide()
     $('#login .loginui .passwordwrong').hide()
     let audio = $('#bgsound')[0]
 

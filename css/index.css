@@ -7,7 +7,6 @@ body{
     margin:0px; 
     padding:0px; 
     overflow:hidden;
-    filter: drop-shadow(0 0 10px white);
 }
 canvas {
     position: absolute;
@@ -188,6 +187,3 @@ canvas {
     text-align: center;
     color:#ff0000;
 }
-
-
-

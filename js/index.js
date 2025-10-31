@@ -1,5 +1,6 @@
 $(function(){
-
+    $('#login').hide()
+    $('#login .loginui .passwordwrong').hide()
     let audio = $('#bgsound')[0]
 
     var soundicr = "[00:02.00] 不将就 \n [00:04.00] 歌：李荣浩 \n [00:07.00] 作词：施人诚 作曲：李荣浩 \n [00:10.50] 编曲：李荣浩 \n  [00:13.00] 那时候 我以为爱的是生活 \n [00:19.00] 也算懂得 什么适合什么不可 \n [00:25.00] 最近还是一样努力着 \n [00:29.00] 想要和你在一起 \n [00:32.00] 你的追求者 你的坎坷 \n [00:36.00] 我开的车 算一算 虚度了多少个年头 \n [00:46.00] 仿佛足够写一套错爱的春秋 \n [00:53.00] 如果以后 你还想为谁 浪费美好时候 \n [00:59.00] 眼泪只能在我的胸膛 毫无保留 \n [01:09.00] 互相吸引到白头 悲伤坚决不放手 \n [01:23.70] 开始纠缠之后 才又被人放大了自由 \n [01:36.00] 你的暴烈太温柔 感情又痛又享受 \n [01:50.00] 如果我说不吻你不罢休 \n [01:55.00] 谁能逼我将就 \n [2:06.50] 你问我 为什么顽固而专一 \n [2:12.00] 天下太大 没有人比你更合适 \n [02:19.00] 其实我觉得这样很值 \n [02:22.00] 只想选择你啊 \n [02:26.00] 你一出场别人都显得不过如此 \n [02:35.00] 互相恩爱到白头 悲伤坚决不放手 \n [02:48.00] 开始纠缠之后 才又被人放大了自由 \n [03:01.00] 你的暴烈太温柔 感情又痛又享受 \n [03:14.00] 如果我说不吻你不罢休 \n [03:20.00] 谁能逼我将就 \n [03:57.80] 互相扶持到白头 悲伤坚决不放手 \n [04:10.00] 开始纠缠之后 才又被人放大了自由 \n [04:24.00] 你的暴烈太温柔 感情又痛又享受 \n [04:38.50] 如果我说不吻你不罢休 \n [04:43.00] 谁能逼我将就 \n [04:50.00] 他们不过将就"
@@ -29,13 +30,40 @@ $(function(){
             var idx = Math.floor(Math.random()*19);
         }
     })
+    // localStorage.setItem('password', text);
+    // if (localStorage.getItem('password')) {
+    //     // 数据存在
+    //     $('#login .loginui .password').val('15340075949')
+    //     $('#login .loginui .sumbit').text('登   录')
+    // }
+    var questionlist = [
+        '请输入你的手机号',
+        '请输入你最喜欢的颜色之一',
+        '请输入你最喜欢的水果之一',
+        '请输入你的生日',
+        '请输入你男朋友的名字',
+        '请输入你的名字'
+    ]
+    var answerlist = [
+        ['15340075949'],
+        ['蓝色','粉色','白色'],
+        ['樱桃','草莓','桃'],
+        ['0118'],
+        ['田江涛'],
+        ['陈道清']
+    ]
+    var questionidx = Math.floor(Math.random()*6)
+    $('#login .loginui .password').prop('placeholder',questionlist[questionidx])
     $('#login .loginui .sumbit').click(function(){
         audio.play()
         var text = $('#login .loginui .password').val()
-        if(text=='15340075949'){
+        if(answerlist[questionidx].indexOf(text) != -1){
             $('#login').hide()
         }else{
-
+            $('#login .loginui .passwordwrong').show()
+            setTimeout(() => {
+                $('#login .loginui .passwordwrong').hide()
+            }, 1000);
         }
     })
 
@@ -93,4 +121,8 @@ $(function(){
         var str = getlovetime(starttime,endtime)
         $("#content .lovetime .lovetimetime").text(str)
     }, 1000);
+
+
+
+    
 })
